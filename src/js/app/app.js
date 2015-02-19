@@ -12,13 +12,13 @@ function init (event)
     // add the renderer view element to the DOM
     document.body.appendChild(_renderer.view);
 
-    requestAnimFrame(animate);
+    requestAnimationFrame(animate);
 }
 
-function animate()
+function animate ()
 { 
-    requestAnimFrame(animate);
+    requestAnimationFrame(animate);
 
     // render the stage   
-    _renderer.render(stage);
+    _renderer.render(_stage);
 }
