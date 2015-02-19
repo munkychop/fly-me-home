@@ -10,6 +10,7 @@
   "version": "0.0.1",
   "private": false,
   "dependencies": {
+    "bullet-pubsub": "^1.1.3",
     "pixi.js": "git://github.com/GoodBoyDigital/pixi.js"
   },
   "devDependencies": {
