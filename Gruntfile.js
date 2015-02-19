@@ -196,6 +196,28 @@ function Gruntfile (grunt)
             }
         },
 
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    // target compiled CSS and JS.
+                    src : [cssDistDir + cssDistFile, jsDistDir + jsDistFile]
+                },
+                options: {
+                    watchTask: true, // set true when also using a seperate watch task, e.g. grunt-contrib-watch
+
+                    server: {
+                        baseDir: distDir
+                    },
+
+                    watchOptions: {
+                        debounceDelay: 1000 // delay for events called in succession for the same file/event
+                    },
+
+                    minify: false
+                }
+            }
+        },
+
         watch: {
             js: {
                 files: [jsSrcDir + "**/*.js"],
@@ -240,7 +262,7 @@ function Gruntfile (grunt)
     // =============
 
     // Default development build, start a server, and watch for changes.
-    grunt.registerTask("default", ["clean", "copy", "sass:dev", "autoprefixer:dist", "browserify:dev", "watch"]);
+    grunt.registerTask("default", ["clean", "copy", "sass:dev", "autoprefixer:dist", "browserify:dev", "browserSync", "watch"]);
 
     // A task for creating a development build.
     grunt.registerTask("dev", ["clean", "copy", "sass:dev", "autoprefixer:dist", "browserify:dev"]);
