@@ -2,7 +2,7 @@ function Gruntfile (grunt)
 {
     "use strict";
 
-    var util = require("util");
+    var alias = require("grunt-browserify-alias");
 
     var srcDir = "src/";
     var distDir = "dist/";
@@ -28,50 +28,27 @@ function Gruntfile (grunt)
     var markupSrcDir = srcDir + "markup/";
     var markupDistDir = distDir;
 
-    // a variable to alias all js files in the app directory, allowing them to be
-    // require'd without any complicated relative filepaths.
-    var browserifyAliasAppFilesArray = aliasMappingsToAliasArray({
-        
-        cwd: jsSrcDir,
-        src: ["**/*.js"],
-        dest: ""
-    });
-
-    // a variable to alias all js files in the app directory, allowing them to be
-    // require'd without any complicated relative filepaths.
-    var browserifyAliasLibFilesArray = aliasMappingsToAliasArray({
-        
-        cwd: jsLibsDir,
-        src: ["**/*.js"],
-        dest: ""
-    });
-
-    var browserifyAliasAllFilesArray = browserifyAliasAppFilesArray.concat(browserifyAliasLibFilesArray);
-
-    // Takes grunt-browserify aliasMappings config and converts it into an alias array
-    function aliasMappingsToAliasArray(aliasMappings)
-    {
-        var aliasArray = [],
-            aliases = util.isArray(aliasMappings) ? aliasMappings : [aliasMappings];
-
-        aliases.forEach(function (alias) {
-
-            grunt.file.expandMapping(alias.src, alias.dest, {cwd: alias.cwd}).forEach(function(file) {
-                
-                var expose = file.dest.substr(0, file.dest.lastIndexOf("."));
-                aliasArray.push("./" + file.src[0] + ":" + expose);
-            });
-        });
-
-        return aliasArray;
-    }
+    // a variable to alias all js files in the directories specified.
+    // This allows them to be require'd without any complicated relative filepaths.
+    var aliasMap = alias.map(grunt, [
+        {    
+            cwd: jsSrcDir, // alias for app files
+            src: ["**/*.js"],
+            dest: ""
+        },
+        {
+            cwd: jsLibsDir, // alias for lib files
+            src: ["**/*.js"],
+            dest: ""
+        }
+    ]);
 
     grunt.initConfig({
 
         browserify: {
             dev: {
                 options : {
-                    alias: browserifyAliasAllFilesArray,
+                    alias: aliasMap,
                     
                     browserifyOptions: {
                         debug: true,
@@ -84,7 +61,7 @@ function Gruntfile (grunt)
 
             dist: {
                 options : {
-                    alias: browserifyAliasAllFilesArray
+                    alias: aliasMap
                 },
 
                 src: jsSrcDir + jsSrcFile,
