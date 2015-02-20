@@ -2,7 +2,7 @@ function Gruntfile (grunt)
 {
     "use strict";
 
-    var alias = require("grunt-browserify-alias");
+    var alias = require("browserify-alias-grunt");
 
     var srcDir = "src/";
     var distDir = "dist/";

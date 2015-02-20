@@ -1,3 +1,5 @@
+"use strict";
+
 var _pixi = require("pixi.js");
 var _eventConstants = require("model/event-constants");
 var _assetManager = require("model/asset-manager");
