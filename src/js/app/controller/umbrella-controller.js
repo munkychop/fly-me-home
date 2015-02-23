@@ -60,6 +60,10 @@ function UmbrellaController ()
 
             if (yPos > _self.canvasHeight + halfSpriteHeight)
             {
+                // randomize x position.
+                umbrellaSprite.position.x = Math.round(Math.random() * _self.canvasWidth);
+
+                // reset y position to the top.
                 yPos = -halfSpriteHeight;
             }
 
