@@ -1,16 +1,30 @@
 function AssetManager ()
 {
+    "use strict";
+
     var _pixi = require("pixi.js");
     var _bullet = require("bullet-pubsub");
     var _eventConstants = require("model/event-constants");
 
-    var _self = this;
+    //var _self = this;
     var _assetLoader;
-    var _assets = ["img/collectibles/umbrella.png"];
+    var _spriteSheets = {
+        umbrella : "img/collectibles/umbrella.png"
+    };
+
+    var _assetArray = [];
+
+    for (var spriteSheet in _spriteSheets)
+    {
+        if (_spriteSheets.hasOwnProperty(spriteSheet))
+        {
+            _assetArray.push(_spriteSheets[spriteSheet]);
+        }
+    }
 
     function preloadAssets ()
     {
-        _assetLoader = new _pixi.AssetLoader(_assets);
+        _assetLoader = new _pixi.AssetLoader(_assetArray);
         _assetLoader.addEventListener("onProgress", loadProgressHandler);
         _assetLoader.addEventListener("onComplete", loadCompleteHandler);
         _assetLoader.load();
@@ -54,7 +68,8 @@ function AssetManager ()
     return {
         preloadAssets : preloadAssets,
         on : on,
-        off : off
+        off : off,
+        spriteSheets : _spriteSheets
     };
 }
 

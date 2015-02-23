@@ -14,8 +14,8 @@ function init (event)
 {
     console.log("init");
 
-    _stage = new _pixi.Stage(0x0);
-    _renderer = _pixi.autoDetectRenderer(1024, 768);
+    _stage = new _pixi.Stage(0xb3ebde);
+    _renderer = _pixi.autoDetectRenderer(1024, 600);
 
     // add the renderer view element to the DOM.
     document.body.appendChild(_renderer.view);
@@ -34,6 +34,10 @@ function preloadCompleteHandler ()
     // cleanup event listeners.
     _assetManager.off(_eventConstants.PRELOAD_COMPLETE, preloadCompleteHandler);
 
+
+    _umbrellaController.init(_renderer.width, _renderer.height);
+    _stage.addChild(_umbrellaController.view);
+
     // start the main animation loop.
     requestAnimationFrame(animate);
 }
@@ -41,6 +45,8 @@ function preloadCompleteHandler ()
 function animate ()
 { 
     requestAnimationFrame(animate);
+
+    _umbrellaController.update();
 
     // render the stage   
     _renderer.render(_stage);
