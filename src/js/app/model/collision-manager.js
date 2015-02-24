@@ -12,8 +12,8 @@ function CollisionManager ()
         var i = 0;
         var length = _collidables.length;
         var currentCollidable;
-        var dx;
-        var dy;
+        var dx; // x-axis distance
+        var dy; // y-axis distance
 
         for (i; i < length; i++)
         {

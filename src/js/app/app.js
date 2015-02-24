@@ -53,7 +53,12 @@ function animate ()
     requestAnimationFrame(animate);
 
     _umbrellaController.update();
+    _heroController.update();
+
+    //_collisionManager.checkForCollisions(collisionHandler);
 
     // render the stage   
     _renderer.render(_stage);
 }
+
+//function collisionHandler(displayObject, collidable){}

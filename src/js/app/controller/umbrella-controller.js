@@ -2,6 +2,7 @@
 
 var _pixi = require("pixi.js");
 var _assetManager = require("model/asset-manager");
+var _collisionManager = require("model/collision-manager");
 
 function UmbrellaController ()
 {
