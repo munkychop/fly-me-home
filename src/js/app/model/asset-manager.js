@@ -9,7 +9,8 @@ function AssetManager ()
     //var _self = this;
     var _assetLoader;
     var _spriteSheets = {
-        umbrella : "img/collectibles/umbrella.png"
+        umbrella : "img/collectibles/umbrella.png",
+        hero : "img/characters/hero.png"
     };
 
     var _assetArray = [];

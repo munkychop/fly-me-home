@@ -4,6 +4,7 @@ var _pixi = require("pixi.js");
 var _eventConstants = require("model/event-constants");
 var _assetManager = require("model/asset-manager");
 var _umbrellaController = require("controller/umbrella-controller");
+var _heroController = require("controller/hero-controller");
 
 var _stage;
 var _renderer;
@@ -34,9 +35,14 @@ function preloadCompleteHandler ()
     // cleanup event listeners.
     _assetManager.off(_eventConstants.PRELOAD_COMPLETE, preloadCompleteHandler);
 
+    var w = _renderer.width;
+    var h = _renderer.height;
 
-    _umbrellaController.init(_renderer.width, _renderer.height);
+    _umbrellaController.init(w, h);
     _stage.addChild(_umbrellaController.view);
+
+    _heroController.init(w, h);
+    _stage.addChild(_heroController.view);
 
     // start the main animation loop.
     requestAnimationFrame(animate);

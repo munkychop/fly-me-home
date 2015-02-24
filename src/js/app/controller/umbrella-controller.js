@@ -6,7 +6,7 @@ var _assetManager = require("model/asset-manager");
 function UmbrellaController ()
 {
     var TOTAL_UMBRELLAS = 10;
-    var MOVE_DISTANCE_Y = 4;
+    var MOVE_DISTANCE_Y = 0.6;
 
     var _self = this;
 
